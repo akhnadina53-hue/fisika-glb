@@ -25,6 +25,26 @@
 
 <p id="hasil"></p>
 
-<script src="script.js"></script>
+<script>
+function hitung() {
+    let xA = parseFloat(document.getElementById("xA").value);
+    let vA = parseFloat(document.getElementById("vA").value);
+    let xB = parseFloat(document.getElementById("xB").value);
+    let vB = parseFloat(document.getElementById("vB").value);
+
+    let t = 0;
+    let dt = 0.1;
+
+    while (t <= 20) {
+        if (Math.abs(xA - xB) < 0.01) break;
+        xA += vA * dt;
+        xB += vB * dt;
+        t += dt;
+    }
+
+    document.getElementById("hasil").innerText =
+        "Simulasi berhasil dijalankan.";
+}
+</script>
 </body>
 </html>
