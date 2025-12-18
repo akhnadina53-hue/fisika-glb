@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Simulasi GLB</title>
-    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1>Simulasi Kejar-kejaran Dua Benda (GLB)</h1>
 
-<label>Posisi awal A (m)</label>
-<input id="xA" type="number">
+<label>Posisi awal A (m):</label>
+<input id="xA" type="number" value="0"><br><br>
 
-<label>Kecepatan A (m/s)</label>
-<input id="vA" type="number">
+<label>Kecepatan A (m/s):</label>
+<input id="vA" type="number" value="2"><br><br>
 
-<label>Posisi awal B (m)</label>
-<input id="xB" type="number">
+<label>Posisi awal B (m):</label>
+<input id="xB" type="number" value="10"><br><br>
 
-<label>Kecepatan B (m/s)</label>
-<input id="vB" type="number">
+<label>Kecepatan B (m/s):</label>
+<input id="vB" type="number" value="1"><br><br>
 
-<button onclick="hitung()">Simulasi</button>
+<button onclick="simulasi()">Simulasikan</button>
 
 <p id="hasil"></p>
 
 <script>
-function hitung() {
+function simulasi() {
     let xA = parseFloat(document.getElementById("xA").value);
     let vA = parseFloat(document.getElementById("vA").value);
     let xB = parseFloat(document.getElementById("xB").value);
@@ -34,17 +34,28 @@ function hitung() {
 
     let t = 0;
     let dt = 0.1;
+    let bertemu = false;
 
-    while (t <= 20) {
-        if (Math.abs(xA - xB) < 0.01) break;
+    while (t <= 50) {
+        if (Math.abs(xA - xB) < 0.01) {
+            bertemu = true;
+            break;
+        }
         xA += vA * dt;
         xB += vB * dt;
         t += dt;
     }
 
-    document.getElementById("hasil").innerText =
-        "Simulasi berhasil dijalankan.";
+    if (bertemu) {
+        document.getElementById("hasil").innerHTML =
+            "Benda bertemu pada waktu <b>" + t.toFixed(2) +
+            " s</b> di posisi <b>" + ((xA + xB) / 2).toFixed(2) + " m</b>";
+    } else {
+        document.getElementById("hasil").innerText =
+            "Benda tidak bertemu.";
+    }
 }
 </script>
+
 </body>
 </html>
